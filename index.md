@@ -237,7 +237,7 @@ Do the following configurations in Jenkins to integrate with Ansible:
 
 ![02_Ansible_Config.PNG](./Images/02_Ansible_Config.PNG)
 
-2. Install Ansible z/OS core collections under Jenkins user by creating a Jenkins job and by executing the installation command from ```Execute shell``` option under ```Add build``` as show in the below figure. Multiple shell commands can be executed as needed.  This is a one-time activity.
+2. Install Ansible z/OS core collections under Jenkins user by creating a Jenkins job and by executing the installation command from ```Execute shell``` drop down option under ```Add build step``` as shown in the below figure. Multiple shell commands can be executed as needed.  This is a one-time activity.
 
 ![03_Install_zos_core_in_Jenkins.PNG](./Images/03_Install_zos_core_in_Jenkins.PNG)
 
