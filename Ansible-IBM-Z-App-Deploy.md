@@ -228,25 +228,25 @@ We use Ansible plugin in Jenkins to execute Ansible playbooks, to install Ansibl
 
 If you want to install Ansible plugin via cli please visit - [Ansible | Jenkins plugin](https://plugins.jenkins.io/ansible/).  
 
-![01_Ansible_Plugin.PNG](./Images/01_Ansible_Plugin.PNG)
+![01_Ansible_Plugin.PNG](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Images/01_Ansible_Plugin.PNG)
 
 Do the following configurations in Jenkins to integrate with Ansible:
  
 1. Define the Ansible installation path in Jenkins from Manage Jenkins ➡ Global Tool Configuration ➡ Ansible ➡ Ansible installations ➡ Add Ansible and provide name and path to the Ansible executables.
 
-![02_Ansible_Config.PNG](./Images/02_Ansible_Config.PNG)
+![02_Ansible_Config.PNG](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Images/02_Ansible_Config.PNG)
 
 2. Install Ansible z/OS core collections under Jenkins user by creating a Jenkins job and by executing the installation command from ```Execute shell``` option under ```Add build``` as show in the below figure. Multiple shell commands can be executed as needed.  This is a one-time activity.
 
-![03_Install_zos_core_in_Jenkins.PNG](./Images/03_Install_zos_core_in_Jenkins.PNG)
+![03_Install_zos_core_in_Jenkins.PNG](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Images/03_Install_zos_core_in_Jenkins.PNG)
 
 3. Create a Jenkins job and add Git as source code management and provide the URL of our Git repository containing Ansible playbooks. This is to pull Ansible playbook repository from Git.
 
-![04_SCM_pull_Ansible_Playbook_in_Jenkins.PNG](./Images/04_SCM_pull_Ansible_Playbook_in_Jenkins.PNG)
+![04_SCM_pull_Ansible_Playbook_in_Jenkins.PNG](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Images/04_SCM_pull_Ansible_Playbook_in_Jenkins.PNG)
 
 4. Add a build step to “invoke Ansible playbook”. Choose the Ansible installation path given in the Global Tool configuration. Provide the playbook path in Jenkins workspace. Provide all other parameters needed under this build step. 
 
-![05_Execute_Ansible_Playbook_in_Jenkins.PNG](./Images/05_Execute_Ansible_Playbook_in_Jenkins.PNG)
+![05_Execute_Ansible_Playbook_in_Jenkins.PNG](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Images/05_Execute_Ansible_Playbook_in_Jenkins.PNG)
 
 5. Execute the playbook from Jenkins by running the Jenkins job defined. We can trigger this Jenkins job in many ways like webhook triggers, calling Jenkins rest API for job build, using scheduler, manual trigger etc.
 
