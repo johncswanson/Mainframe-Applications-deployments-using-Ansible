@@ -1,0 +1,32 @@
+- name: Job template render for LOAD module copy
+  template:
+    src: './files/LOADCOPY.j2'
+    dest: '/tmp/LOADCOPY.bin'
+  register: result
+
+- name: LOAD module copy - Template Response
+  debug:
+    msg: "{{ result }}"
+       
+- name: Convert LOAD Copy JCL encoding from ISO8859-1 to IBM-1047
+  zos_encode:
+    src: '/tmp/LOADCOPY.bin'
+    dest: '/tmp/LOADCOPY.jcl'
+    to_encoding: IBM-1047
+    from_encoding: ISO8859-1
+  register: result
+
+- name: LOAD Copy JCL Encoding conversion response
+  debug:
+    msg: "{{ result }}"   
+
+- name: Submit the job from USS
+  zos_job_submit:
+    src: '/tmp/LOADCOPY.jcl'
+    location: USS
+    wait: true
+  register: result
+
+- name: Job Response
+  debug:
+    msg: "{{ result.jobs[0].ret_code }}"

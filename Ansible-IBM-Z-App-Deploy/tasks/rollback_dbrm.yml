@@ -1,0 +1,32 @@
+- name: DBRM Rollback Job template render
+  template:
+    src: './files/DBRMROLB.j2'
+    dest: '/tmp/DBRMROLB.bin'
+  register: result
+
+- name: DBRM Rollback Job Template Response
+  debug:
+    msg: "{{ result }}"
+       
+- name: Convert DBRM Rollback Job JCL file encoding from ISO8859-1 to IBM-1047
+  zos_encode:
+    src: '/tmp/DBRMROLB.bin'
+    dest: '/tmp/DBRMROLB.jcl'
+    to_encoding: IBM-1047
+    from_encoding: ISO8859-1
+  register: result
+
+- name: DBRM Copy Rollback JCL Encoding conversion response
+  debug:
+    msg: "{{ result }}"   
+
+- name: Submit the job from USS
+  zos_job_submit:
+    src: '/tmp/DBRMROLB.jcl'
+    location: USS
+    wait: true
+  register: result
+
+- name: Job Response
+  debug:
+    msg: "{{ result.jobs[0].ret_code }}"

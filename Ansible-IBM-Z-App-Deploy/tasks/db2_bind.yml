@@ -1,0 +1,32 @@
+- name: DB2 Bind Job template render
+  template:
+    src: './files/DB2BIND.j2'
+    dest: '/tmp/DB2BIND.bin'
+  register: result
+
+- name: DB2 Bind Job Template Response
+  debug:
+    msg: "{{ result }}"
+       
+- name: Convert DB2 Bind JCL file encoding from ISO8859-1 to IBM-1047
+  zos_encode:
+    src: '/tmp/DB2BIND.bin'
+    dest: '/tmp/DB2BIND.jcl'
+    to_encoding: IBM-1047
+    from_encoding: ISO8859-1
+  register: result
+
+- name: DB2 Bind JCL Encoding conversion response
+  debug:
+    msg: "{{ result }}"   
+
+- name: Submit the job from USS
+  zos_job_submit:
+    src: '/tmp/DB2BIND.jcl'
+    location: USS
+    wait: true
+  register: result
+
+- name: DB2 Bind JCL Response
+  debug:
+    msg: "{{ result.jobs[0].ret_code }}"    

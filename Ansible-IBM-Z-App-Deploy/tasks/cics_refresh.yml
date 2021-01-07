@@ -1,0 +1,9 @@
+- name: New Copy CICS Program
+  zos_operator:
+    cmd: 'F CICSTS55,CEMT S PROG({{ item }}) NEW'
+  loop: "{{ cics_pgms }}"
+  register: result
+
+- name: Response for New Copy
+  debug:
+    msg: "{{ result }}"
