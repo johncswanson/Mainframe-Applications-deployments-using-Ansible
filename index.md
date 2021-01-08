@@ -11,7 +11,7 @@ This tutorial discusses how to deploy mainframe applications using Ansible and i
 ## Prerequisites
 - [Ansible](https://www.ansible.com/) 2.9 or later
 - [z/OS Core collection](https://galaxy.ansible.com/ibm/ibm_zos_core) for Ansible
-- [Python, z/OS OpenSSH and IBM Z Open Automation Utilities](https://ibm.github.io/z_ansible_collections_doc/ibm_zos_core/docs/source/requirements_managed.html) in Managed Node (z/OS)
+- [Python, z/OS OpenSSH and IBM Z Open Automation Utilities](https://ibm.github.io/z_ansible_collections_doc/ibm_zos_core/docs/source/requirements_managed.html) in managed node (z/OS)
 - Any Git based repositories like [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/), [Bitbucket](https://bitbucket.org/) etc.
 - [Jenkins](https://www.jenkins.io/doc/book/getting-started/) orchestrator
 
