@@ -17,7 +17,7 @@ This tutorial discusses how to deploy mainframe applications using Ansible and i
 
 
 ## Estimated Time
-It should take about 2 hours to complete this tutorial .
+It should take about 3 - 4 hours to complete this tutorial .
 
 ## Steps
 ### IBM Z application deployment using Ansible
