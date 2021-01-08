@@ -32,7 +32,7 @@ Implement the CICS-COBOL-DB2 application deployment steps with Ansible playbooks
 
 1. Define the Ansible environment configuration in “[./ansible.cfg](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/ansible.cfg)” file and use “[./inventory](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/inventory)“ file to define z/OS managed node and to provide the Python interpreter path in z/OS USS. Also define environment variables required for Ansible to work with z/OS in a variable file “[./group_vars/all.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/group_vars/all.yml)”  
 
-2. Define the variables that can be used in the deployment playbook in a variable file - “[./group_vars/deploy_vars.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/group_vars/deploy_vars.yml)”. This is for the  ease of maintaining the playbook. Following is an excerpt of the variable file:
+2. Define the variables that can be used in the deployment playbook in a variable file - “[./group_vars/deploy_vars.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/group_vars/deploy_vars.yml)”. This is for the  ease of maintaining the playbook. Following is an excerpt of the deployment variables file:
 ```YAML
 # Is the application Batch, DB2, CICS or both.  Set true or false as per your application.
 cics: true
