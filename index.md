@@ -59,7 +59,7 @@ db2_plan: #<DB2 Plan name>
 cics_pgms: #<List of modified CICS programs to deploy, Ex:['LOAD01','LOAD02','LOAD03']>
 ```
 
-3. Create an Ansible playbook - “[./deploy_app.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/deploy_app.yml)” that when executed can deploy the application. The variables ```db2``` and ```cics``` defined in “[./group_vars/deploy_vars.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/group_vars/deploy_vars.yml)”, can help in deciding whether DB2 bind or CICS refresh or both DB2 bind and CICS refresh are required to complete application deployment. This helps to use the same playbook with multiple application sub-types CICS-COBOL, COBOL-DB2 or just COBOL. Following is an excerpt of the Ansible playbook:
+3. Create an Ansible playbook - “[./deploy_app.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/deploy_app.yml)” that when executed can deploy the application. The variables ```db2``` and ```cics``` defined in “[./group_vars/deploy_vars.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/group_vars/deploy_vars.yml)”, can help in deciding whether DB2 bind or CICS refresh or both DB2 bind and CICS refresh are required to complete application deployment. This helps to use the same playbook with multiple application sub-types CICS-COBOL, COBOL-DB2 or just COBOL. Following is an excerpt of the deployment playbook:
 ```YAML
 - name: Deploy Z Application
   hosts: all
