@@ -24,13 +24,7 @@ We will perform these actions on z/OS using Ansible below.
 
 ## Flow
 
-Insert diagram here
-
-1. @@need something here@@
-
-1. @@need something here@@
-
-1. @@need something here@@
+![06_Ansible_Deployment_Flow.PNG](./Images/06_Ansible_Deployment_Flow.PNG)
 
 ## Related Links
 
