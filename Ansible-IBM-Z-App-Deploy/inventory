@@ -1,6 +1,0 @@
-zsystem:
-  hosts:
-    zos:
-      ansible_host: <zOS Host IP>
-      ansible_user: ibmuser
-      ansible_python_interpreter: <Python interpretor path in USS>
