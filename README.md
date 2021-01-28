@@ -254,7 +254,7 @@ Do the following configurations in Jenkins to integrate with Ansible:
 
 5. Execute the playbook from Jenkins by running the Jenkins job defined. This Jenkins job can be triggered in many ways like webhook triggers, calling the Jenkins REST API for job build, using scheduler, manual trigger, etc. If the Ansible engine is installed on a different server other than Jenkins, then submit the Jenkins job to the Jenkins agent running in the Ansible engine server node.
 
-For the complete sample playbooks, tasks, templates and files discussed above, please visit the GitHub repo - [Ansible-IBM-Z-App-Deploy](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy)
+For the complete sample playbooks, tasks, templates and files discussed above, please visit the GitHub repo - [Ansible-IBM-Z-App-Deploy](./)
 
 ## Related Links
 
