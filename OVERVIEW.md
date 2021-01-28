@@ -24,7 +24,7 @@ We will perform these actions on z/OS using Ansible below.
 
 ## Flow
 
-![06_Ansible_Deployment_Flow.PNG](./Images/06_Ansible_Deployment_Flow.PNG)
+![06_Ansible_Deployment_Flow.PNG](./Images/06_Ansible_Deployment_Flow.png)
 
 ## Related Links
 

@@ -14,7 +14,7 @@ This tutorial discusses how to deploy mainframe applications using Ansible and i
 
 ## Flow
 
-![06_Ansible_Deployment_Flow.PNG](./Images/06_Ansible_Deployment_Flow.PNG)
+![06_Ansible_Deployment_Flow.PNG](./Images/06_Ansible_Deployment_Flow.png)
 
 ## Instructions
 
