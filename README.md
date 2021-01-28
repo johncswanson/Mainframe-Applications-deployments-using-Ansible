@@ -40,9 +40,9 @@ It should take about 3 - 4 hours to complete this tutorial .
 
 ## Instructions
 
-1. Define the Ansible environment configuration using [./ansible.cfg](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/ansible.cfg) and [./inventory](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/inventory).  These files will need to be customized to your environment to define the z/OS managed node and to provide the Python interpreter path in z/OS Unux Systems Services (USS). Required  environment variables are defined in a variable file name [./group_vars/all.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/group_vars/all.yml).
+1. Define the Ansible environment configuration using [./ansible.cfg](./ansible.cfg) and [./inventory](./inventory).  These files will need to be customized to your environment to define the z/OS managed node and to provide the Python interpreter path in z/OS Unux Systems Services (USS). Required  environment variables are defined in a variable file name [./group_vars/all.yml](./group_vars/all.yml).
 
-2. Define the variables that can be used in the deployment playbook in a variable file named [./group_vars/deploy_vars.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/group_vars/deploy_vars.yml). This is for the  ease of maintaining the playbook. Following is an excerpt of the deployment variables file:
+2. Define the variables that can be used in the deployment playbook in a variable file named [./group_vars/deploy_vars.yml](./group_vars/deploy_vars.yml). This is for the  ease of maintaining the playbook. Following is an excerpt of the deployment variables file:
 ```YAML
 # Is the application Batch, DB2, CICS or both.  Set true or false as per your application.
 cics: true
@@ -69,7 +69,7 @@ db2_plan: #<DB2 Plan name>
 cics_pgms: #<List of modified CICS programs to deploy, Ex:['LOAD01','LOAD02','LOAD03']>
 ```
 
-3. Create an Ansible playbook named [./deploy_app.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/deploy_app.yml) to deploy the application. The variables ```db2``` and ```cics``` defined in [./group_vars/deploy_vars.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/group_vars/deploy_vars.yml) can help in deciding whether a DB2 bind or CICS refresh or both DB2 bind and CICS refresh are required to complete application deployment. This helps to use the same playbook with multiple application sub-types like CICS-COBOL, COBOL-DB2 or just COBOL. Following is an excerpt of the deployment playbook:
+3. Create an Ansible playbook named [./deploy_app.yml](./deploy_app.yml) to deploy the application. The variables ```db2``` and ```cics``` defined in [./group_vars/deploy_vars.yml](./group_vars/deploy_vars.yml) can help in deciding whether a DB2 bind or CICS refresh or both DB2 bind and CICS refresh are required to complete application deployment. This helps to use the same playbook with multiple application sub-types like CICS-COBOL, COBOL-DB2 or just COBOL. Following is an excerpt of the deployment playbook:
 ```YAML
 - name: Deploy Z Application
   hosts: all
@@ -107,7 +107,7 @@ cics_pgms: #<List of modified CICS programs to deploy, Ex:['LOAD01','LOAD02','LO
       when: (cics == true)    
 ```
 
-4.	One way to back up and copy the load modules and DBRM's from source libraries to backup libraries and target libraries is using the IEBCOPY utility. Use the Ansible template module and Jinja2 templating to dynamically generate the JCL required to back up or copy your load modules.  An example of the Jinja2 template is located at [./files/LOADBKUP.j2](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/files/LOADBKUP.j2) for JCL to backup load module. All the variables inside double curly braces ```{{}}``` in the Jinja2 template can substitute the values from our variable file [./group_vars/deploy_vars.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/group_vars/deploy_vars.yml). The substitution is performed by the Ansible template module during the playbook execution. The ```for``` loop in the ```SYSIN``` can replicate the ```select``` statement for each of the load members to be backed up during the execution. Following is an excerpt of the Jinja2 template for backing up load modules:
+4.	One way to back up and copy the load modules and DBRM's from source libraries to backup libraries and target libraries is using the IEBCOPY utility. Use the Ansible template module and Jinja2 templating to dynamically generate the JCL required to back up or copy your load modules.  An example of the Jinja2 template is located at [./files/LOADBKUP.j2](./files/LOADBKUP.j2) for JCL to backup load module. All the variables inside double curly braces ```{{}}``` in the Jinja2 template can substitute the values from our variable file [./group_vars/deploy_vars.yml](./group_vars/deploy_vars.yml). The substitution is performed by the Ansible template module during the playbook execution. The ```for``` loop in the ```SYSIN``` can replicate the ```select``` statement for each of the load members to be backed up during the execution. Following is an excerpt of the Jinja2 template for backing up load modules:
 ```JCL
 //COPYLOAD EXEC PGM=IEBCOPY,REGION=4M          
 //*MAIN SYSTEM=JLOCAL,LINES=99                 
@@ -126,7 +126,7 @@ cics_pgms: #<List of modified CICS programs to deploy, Ex:['LOAD01','LOAD02','LO
 /* 
 ```
 
-5. Create a task to back up load modules named  [./tasks/bkp_load.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/tasks/bkp_load.yml). This task can dynamically generate JCL to back up load modules in z/OS using the Jinja2 template with the Ansible template module and then subsequently execute the generated JCL. Following is an excerpt of the load modules backup task.
+5. Create a task to back up load modules named  [./tasks/bkp_load.yml](./tasks/bkp_load.yml). This task can dynamically generate JCL to back up load modules in z/OS using the Jinja2 template with the Ansible template module and then subsequently execute the generated JCL. Following is an excerpt of the load modules backup task.
 ```YAML
 - name: Job template render for LOAD module backup
   template:
@@ -162,9 +162,9 @@ cics_pgms: #<List of modified CICS programs to deploy, Ex:['LOAD01','LOAD02','LO
     msg: "{{ result.jobs[0].ret_code }}"
 ```
 
-6. Create JCL templates and tasks to copy the load modules to target libraries named [./tasks/copy_load.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/tasks/copy_load.yml), backing up DBRM's named [./tasks/bkp_dbrm.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/tasks/bkp_dbrm.yml), and copying DBRM's to target libraries – [./tasks/copy_dbrm.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/tasks/copy_dbrm.yml).  These tasks are very similar to step 4 and step 5.
+6. Create JCL templates and tasks to copy the load modules to target libraries named [./tasks/copy_load.yml](./tasks/copy_load.yml), backing up DBRM's named [./tasks/bkp_dbrm.yml](./tasks/bkp_dbrm.yml), and copying DBRM's to target libraries – [./tasks/copy_dbrm.yml](./tasks/copy_dbrm.yml).  These tasks are very similar to step 4 and step 5.
 
-7. Use the Ansible template module and Jinja2 templating to generate DB2 bind JCL. Our Jinja2 template is named [./files/DB2BIND.j2](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/files/DB2BIND.j2) for Db2 bind JCL. All variables inside double curly braces ```{{}}``` in Jinja2 template can substitute with the values from the variable file [./group_vars/deploy_vars.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/group_vars/deploy_vars.yml) during execution. This substitution is done by the Ansible template module. The ```for``` loop in the ```SYSIN``` can replicate the ```BIND PACKAGE``` statement for the required DBRMs. Following is an excerpt of Jinja2 template for DB2 bind JCL:
+7. Use the Ansible template module and Jinja2 templating to generate DB2 bind JCL. Our Jinja2 template is named [./files/DB2BIND.j2](./files/DB2BIND.j2) for Db2 bind JCL. All variables inside double curly braces ```{{}}``` in Jinja2 template can substitute with the values from the variable file [./group_vars/deploy_vars.yml](./group_vars/deploy_vars.yml) during execution. This substitution is done by the Ansible template module. The ```for``` loop in the ```SYSIN``` can replicate the ```BIND PACKAGE``` statement for the required DBRMs. Following is an excerpt of Jinja2 template for DB2 bind JCL:
 ```JCL
 //BIND    EXEC PGM=IKJEFT01,DYNAMNBR=20
 //STEPLIB  DD  DSN=DSNC10.SDSNLOAD,DISP=SHR
@@ -211,9 +211,9 @@ END
 /*
 ```
 
-8. Create an Ansible task named [./tasks/db2_bind.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/tasks/db2_bind.yml) to generate Db2 BIND JCL, copy the JCL to a z/OS USS path, and execute using the Ansible playbook. This is very similar to what is mentioned in Step 5 for load modules backup.
+8. Create an Ansible task named [./tasks/db2_bind.yml](./tasks/db2_bind.yml) to generate Db2 BIND JCL, copy the JCL to a z/OS USS path, and execute using the Ansible playbook. This is very similar to what is mentioned in Step 5 for load modules backup.
 
-9. Do the CICS refresh (new copy) from an Ansible playbook by executing ```CEMT``` transaction in the target CICS region. To achieve this using Ansible, use the ```zos_operator module``` to issue ```CEMT``` as a console command in the playbook task.  See [./tasks/cics_refresh.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/tasks/cics_refresh.yml). The variable ```cics_pgms``` can resolve from the variables file located at [./group_vars/deploy_vars.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/group_vars/deploy_vars.yml). Do the CICS new copy for all the programs listed in ```cics_pgms```. Following is an excerpt of the CICS refresh task.
+9. Do the CICS refresh (new copy) from an Ansible playbook by executing ```CEMT``` transaction in the target CICS region. To achieve this using Ansible, use the ```zos_operator module``` to issue ```CEMT``` as a console command in the playbook task.  See [./tasks/cics_refresh.yml](./tasks/cics_refresh.yml). The variable ```cics_pgms``` can resolve from the variables file located at [./group_vars/deploy_vars.yml](./group_vars/deploy_vars.yml). Do the CICS new copy for all the programs listed in ```cics_pgms```. Following is an excerpt of the CICS refresh task.
 ```YAML
 - name: New Copy CICS Program
   zos_operator:
@@ -226,7 +226,7 @@ END
     msg: "{{ result }}"
 ```
 
-10. Perform rollback to reverse the changes in target libraries if required. Create an Ansible task - [./rollback_app.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/rollback_app.yml) to copy back the previous version of the load modules and DBRMs from the backup libraries to the target environment libraries. Bind the DBRM's to the Db2 plan and do CICS refresh (new copy) to the CICS load modules based on the parameters ```db2``` and ```cics``` defined in variables file - “[./group_vars/deploy_vars.yml](https://github.com/anuprakashm/Mainframe-Applications-deployments-using-Ansible/tree/main/Ansible-IBM-Z-App-Deploy/group_vars/deploy_vars.yml)”. 
+10. Perform rollback to reverse the changes in target libraries if required. Create an Ansible task - [./rollback_app.yml](./rollback_app.yml) to copy back the previous version of the load modules and DBRMs from the backup libraries to the target environment libraries. Bind the DBRM's to the Db2 plan and do CICS refresh (new copy) to the CICS load modules based on the parameters ```db2``` and ```cics``` defined in variables file - “[./group_vars/deploy_vars.yml](./group_vars/deploy_vars.yml)”. 
 
 ### DevOps integration: Versioning and integrating Ansible playbooks in CI-CD pipeline
 
