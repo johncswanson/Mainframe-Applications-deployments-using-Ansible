@@ -18,7 +18,7 @@ This tutorial discusses how to deploy mainframe applications using Ansible and i
 
 ## Instructions
 
-xxx
+This code pattern will give you a base to build the Ansible playbooks for deploying z/OS applications.
 
 ## Related Links
 
@@ -27,7 +27,7 @@ xxx
 
 ## Next Steps
 
-abc
+Watch out this space for new Ansible collections for z/OS - [Ansible Galaxy](https://galaxy.ansible.com/search?deprecated=false&keywords=zos&order_by=-relevance&page=1). 
 
 ## License
 

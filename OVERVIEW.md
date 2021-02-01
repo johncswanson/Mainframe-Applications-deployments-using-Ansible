@@ -33,7 +33,7 @@ We will perform these actions on z/OS using Ansible below.
 
 ## Next Steps
 
-@@need something here@@
+Watch out this space for new Ansible collections for z/OS - [Ansible Galaxy](https://galaxy.ansible.com/search?deprecated=false&keywords=zos&order_by=-relevance&page=1). 
 
 ## License
 

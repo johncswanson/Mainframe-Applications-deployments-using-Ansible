@@ -263,7 +263,7 @@ For the complete sample playbooks, tasks, templates and files discussed above, p
 
 ## Next Steps
 
-abc
+Watch out this space for new Ansible collections for z/OS - [Ansible Galaxy](https://galaxy.ansible.com/search?deprecated=false&keywords=zos&order_by=-relevance&page=1). 
 
 ## License
 
